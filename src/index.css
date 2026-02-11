@@ -1,0 +1,254 @@
+:root {
+  --bg-dark: #000000;
+  --bg-darker: #000000;
+  --accent-purple: #7000ff;
+  --accent-blue: #0070ff;
+  --accent-pink: #ff00c8;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --font-main: 'Inter', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+/* Glassmorphism Utilities */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+}
+
+.glass-nav {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #fff 0%, #a855f7 50%, #7000ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(168, 85, 247, 0.2);
+}
+
+.gradient-text-pink {
+  background: linear-gradient(135deg, #ff00c8 0%, #7000ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Professional Scroll Management via Lenis (App.jsx) */
+html,
+body {
+  height: auto;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
+
+/* Selection */
+::selection {
+  background: var(--accent-purple);
+  color: white;
+}
+
+section {
+  padding: 120px 5%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+.app-container {
+  overflow-x: hidden;
+  position: relative;
+  scroll-padding-top: 80px;
+}
+
+.reveal-section {
+  will-change: transform, opacity;
+}
+
+canvas {
+  pointer-events: none;
+}
+
+/* Optimize transitions */
+* {
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.responsive-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 60px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+  color: white;
+  padding: 12px 32px;
+  border-radius: 12px;
+  font-size: 1rem;
+  box-shadow: 0 4px 20px rgba(112, 0, 255, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(112, 0, 255, 0.5);
+  filter: brightness(1.1);
+}
+
+.footer-link {
+  display: inline-block;
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: white !important;
+  transform: translateX(5px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  section {
+    padding: 100px 5%;
+  }
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 80px 20px;
+    min-height: auto;
+  }
+
+  h1 {
+    font-size: 2.8rem !important;
+  }
+
+  h2 {
+    font-size: 2.2rem !important;
+  }
+
+  h3 {
+    font-size: 1.8rem !important;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .container {
+    padding: 0 10px;
+  }
+
+  .responsive-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
