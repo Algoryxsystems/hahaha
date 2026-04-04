@@ -37,7 +37,7 @@ const features = [
 
 const Features = () => {
     return (
-        <section id="features" style={{ background: '#000000' }}>
+        <section id="solutions" style={{ background: '#000000' }}>
             <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: '80px' }}>
                     <h2 style={{ fontSize: '3rem', fontWeight: 800, marginBottom: '20px' }}>
@@ -86,6 +86,30 @@ const Features = () => {
                         </motion.div>
                     ))}
                 </div>
+
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.98 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1 }}
+                    style={{
+                        marginTop: '80px',
+                        padding: '40px',
+                        background: 'linear-gradient(90deg, rgba(112, 0, 255, 0.05), transparent)',
+                        border: '1px solid rgba(112, 0, 255, 0.1)',
+                        borderRadius: '24px',
+                        textAlign: 'center'
+                    }}
+                >
+                    <p style={{
+                        fontSize: '1.1rem',
+                        color: 'rgba(255,255,255,0.8)',
+                        margin: 0,
+                        fontWeight: 500,
+                        letterSpacing: '0.02em'
+                    }}>
+                        <span style={{ color: 'var(--accent-purple)', fontWeight: 700 }}>Breakpoint:</span> Powering the next generation of security analysis and operational intelligence.
+                    </p>
+                </motion.div>
             </div>
         </section>
     );

@@ -82,7 +82,7 @@ const ImageMatchedRobot = () => {
 
 const RobotSection = () => {
     return (
-        <section id="ai-companion" style={{
+        <section id="product" style={{
             minHeight: 'auto',
             background: '#000000',
             position: 'relative',

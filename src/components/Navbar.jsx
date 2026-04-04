@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [activeDropdown, setActiveDropdown] = useState(null);
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
     const navLinks = [
-        { name: 'Product', href: '#product' },
+        {
+            name: 'Products',
+            href: '#product',
+            dropdown: [
+                { name: 'Breakpoint', href: 'https://breakpoint-web-one.vercel.app', external: true }
+            ]
+        },
         { name: 'Solutions', href: '#solutions' },
         { name: 'Security', href: '#security' },
         { name: 'Company', href: '#company' }
@@ -47,21 +54,88 @@ const Navbar = () => {
                     color: 'rgba(255,255,255,0.7)'
                 }}>
                     {navLinks.map((item) => (
-                        <motion.a
-                            href={item.href}
+                        <div
                             key={item.name}
-                            whileHover={{ color: '#fff' }}
-                            style={{ textDecoration: 'none', color: 'inherit', transition: '0.3s' }}
+                            style={{ position: 'relative' }}
+                            onMouseEnter={() => item.dropdown && setActiveDropdown(item.name)}
+                            onMouseLeave={() => item.dropdown && setActiveDropdown(null)}
                         >
-                            {item.name}
-                        </motion.a>
-                    ))}
-                </div>
+                            <motion.a
+                                href={item.href}
+                                whileHover={{ color: '#fff' }}
+                                style={{
+                                    textDecoration: 'none',
+                                    color: 'inherit',
+                                    transition: '0.3s',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '6px'
+                                }}
+                            >
+                                {item.name}
+                                {item.dropdown && <ChevronDown size={14} />}
+                            </motion.a>
 
-                <div className="desktop-only">
-                    <button className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.9rem' }}>
-                        Launch Breakpoint
-                    </button>
+                            {item.dropdown && (
+                                <AnimatePresence>
+                                    {activeDropdown === item.name && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                                            transition={{ duration: 0.2 }}
+                                            style={{
+                                                position: 'absolute',
+                                                top: '100%',
+                                                left: '-20px',
+                                                paddingTop: '20px',
+                                                zIndex: 100
+                                            }}
+                                        >
+                                            <div className="glass-card" style={{
+                                                padding: '15px',
+                                                minWidth: '180px',
+                                                background: 'rgba(10, 10, 10, 0.95)',
+                                                backdropFilter: 'blur(20px)',
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                gap: '10px',
+                                                boxShadow: '0 10px 40px rgba(0,0,0,0.5)'
+                                            }}>
+                                                {item.dropdown.map((dropItem) => (
+                                                    <a
+                                                        key={dropItem.name}
+                                                        href={dropItem.href}
+                                                        target={dropItem.external ? "_blank" : "_self"}
+                                                        rel={dropItem.external ? "noopener noreferrer" : ""}
+                                                        style={{
+                                                            textDecoration: 'none',
+                                                            color: 'rgba(255,255,255,0.6)',
+                                                            fontSize: '0.85rem',
+                                                            transition: '0.2s',
+                                                            padding: '8px 12px',
+                                                            borderRadius: '8px',
+                                                            display: 'block'
+                                                        }}
+                                                        onMouseEnter={(e) => {
+                                                            e.target.style.color = '#fff';
+                                                            e.target.style.background = 'rgba(255,255,255,0.05)';
+                                                        }}
+                                                        onMouseLeave={(e) => {
+                                                            e.target.style.color = 'rgba(255,255,255,0.6)';
+                                                            e.target.style.background = 'transparent';
+                                                        }}
+                                                    >
+                                                        {dropItem.name}
+                                                    </a>
+                                                ))}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            )}
+                        </div>
+                    ))}
                 </div>
 
                 {/* Mobile Toggle */}
@@ -88,29 +162,57 @@ const Navbar = () => {
                             padding: '20px 5%',
                             display: 'flex',
                             flexDirection: 'column',
-                            gap: '20px',
+                            gap: '15px',
                             borderBottom: '1px solid rgba(255,255,255,0.1)'
                         }}
                     >
                         {navLinks.map((item) => (
-                            <a
-                                key={item.name}
-                                href={item.href}
-                                onClick={() => setIsMenuOpen(false)}
-                                style={{
-                                    textDecoration: 'none',
-                                    color: '#fff',
-                                    fontSize: '1.1rem',
-                                    fontWeight: 500,
-                                    padding: '10px 0'
-                                }}
-                            >
-                                {item.name}
-                            </a>
+                            <div key={item.name} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                                <a
+                                    href={item.href}
+                                    onClick={() => !item.dropdown && setIsMenuOpen(false)}
+                                    style={{
+                                        textDecoration: 'none',
+                                        color: '#fff',
+                                        fontSize: '1.1rem',
+                                        fontWeight: 500,
+                                        padding: '10px 0',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between'
+                                    }}
+                                >
+                                    {item.name}
+                                </a>
+                                {item.dropdown && (
+                                    <div style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: '12px',
+                                        paddingLeft: '20px',
+                                        borderLeft: '1px solid rgba(255,255,255,0.1)',
+                                        marginBottom: '10px'
+                                    }}>
+                                        {item.dropdown.map((dropItem) => (
+                                            <a
+                                                key={dropItem.name}
+                                                href={dropItem.href}
+                                                target={dropItem.external ? "_blank" : "_self"}
+                                                rel={dropItem.external ? "noopener noreferrer" : ""}
+                                                onClick={() => setIsMenuOpen(false)}
+                                                style={{
+                                                    textDecoration: 'none',
+                                                    color: 'rgba(255,255,255,0.5)',
+                                                    fontSize: '0.95rem'
+                                                }}
+                                            >
+                                                {dropItem.name}
+                                            </a>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
                         ))}
-                        <button className="btn-primary" style={{ width: '100%', marginTop: '10px' }}>
-                            Launch Breakpoint
-                        </button>
                     </motion.div>
                 )}
             </AnimatePresence>
