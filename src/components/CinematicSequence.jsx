@@ -163,7 +163,7 @@ const CinematicParticles = ({ targetPositions }) => {
                             // PHASE 2: Solid State (Emblem Locked)
                             float t = smoothstep(1.0, 2.0, p);
                             pos = shiftedTarget;
-                            vOpacity = mix(0.2, 0.25, t);
+                            vOpacity = mix(0.5, 0.6, t); // Increased from 0.2-0.25
                             vFinal = t;
                         } else {
                             // PHASE 3: TRUE MIRRORED REVERSE (Logo -> Chaos)
@@ -181,9 +181,9 @@ const CinematicParticles = ({ targetPositions }) => {
                             vec3 curve = cross(normalize(dir + 0.0001), vec3(0.0, 1.0, 0.0)) * sin(t * 3.1415) * 4.0 * t;
 
                             pos = mix(shiftedTarget, chaosPosition + noise, t) + curve;
-                            vOpacity = mix(0.25, 0.0, t);
-                            vFinal = 1.0 - t;
-                        }
+                             vOpacity = mix(0.6, 0.0, t); // Starts from 0.6 to match solid state end
+                             vFinal = 1.0 - t;
+                         }
 
                         vPos = pos;
                         vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
@@ -207,9 +207,9 @@ const CinematicParticles = ({ targetPositions }) => {
                         float d = distance(gl_PointCoord, vec2(0.5));
                         if (d > 0.5) discard;
                         
-                        // Simple and Clean: Diminished Opacity
+                        // Improved: Higher visibility multiplier
                         float alpha = smoothstep(0.5, 0.45, d);
-                        gl_FragColor = vec4(vec3(1.0), vOpacity * alpha * 0.4);
+                        gl_FragColor = vec4(vec3(1.0), vOpacity * alpha * 0.85);
                     }
                 `}
             />
@@ -245,24 +245,26 @@ const CinematicSequence = () => {
                 }
             });
 
-            // 1. ASSEMBLE: 0->1 exactly over the Hero section
+            // 1. ASSEMBLE: 0->1 over the Hero section
             tl.to(progressObj.current, {
                 val: 1,
                 duration: 10,
                 ease: "none"
             });
 
-            // 2. SOLID STATE: Holds 1->1.2 over the TrustedBy section
+            // 2. SOLID STATE: Holds 1->2.0 over the Impact Statement section
+            // Phase 2 (Solid) is 1.0 to 2.0 in the shader
             tl.to(progressObj.current, {
-                val: 1.2,
-                duration: 4,
+                val: 2.0,
+                duration: 6,
                 ease: "none"
             });
 
             // 3. REVERSE DISPERSAL: SHATTERS AS YOU ENTER THE INDUSTRY PROBLEM
+            // Phase 3 starts at val=2.0
             tl.to(progressObj.current, {
                 val: 3.0,
-                duration: 10,
+                duration: 12,
                 ease: "none"
             });
 

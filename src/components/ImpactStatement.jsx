@@ -1,17 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const companies = [
-    "CYBERDYNE", "STARK ENT", "WAYNE CORP", "TYRELL", "OSCORP", "OMNICP", "TETRA", "SPECTRE"
+const BreakpointStats = [
+    "UNRESTRICTED", "VULNERABILITY", "DETECTION", "ENGINE", "ENGINEERED", "IDENTIFY", "ELIMINATE", "RISKS"
 ];
 
-const TrustedBy = () => {
+const ImpactStatement = () => {
     return (
-        <section id="trusted" style={{
+        <section id="impact" style={{
             minHeight: 'auto',
             padding: '80px 0',
             background: 'transparent',
-            border: 'none'
+            border: 'none',
+            position: 'relative',
+            zIndex: 2
         }}>
             <div className="container responsive-grid">
                 <div>
@@ -23,7 +25,7 @@ const TrustedBy = () => {
                         marginBottom: '30px',
                         textTransform: 'uppercase'
                     }}>
-                        Trusted by industry leaders in infrastructure
+                        BREAKPOINT: NEW STANDARD IN SECURITY INTELLIGENCE
                     </p>
                     <div style={{
                         display: 'flex',
@@ -33,7 +35,7 @@ const TrustedBy = () => {
                         opacity: 0.5,
                         filter: 'grayscale(100%) brightness(200%)'
                     }}>
-                        {companies.map((company, i) => (
+                        {BreakpointStats.map((stat, i) => (
                             <motion.div
                                 key={i}
                                 whileHover={{ scale: 1.1, opacity: 1, filter: 'grayscale(0%) brightness(100%)' }}
@@ -42,19 +44,20 @@ const TrustedBy = () => {
                                     fontWeight: 800,
                                     color: '#fff',
                                     letterSpacing: '2px',
-                                    transition: '0.3s'
+                                    transition: '0.3s',
+                                    cursor: 'default'
                                 }}
                             >
-                                {company}
+                                {stat}
                             </motion.div>
                         ))}
                     </div>
                 </div>
-                {/* Right side empty column - stacks on mobile naturally */}
+                {/* Right side empty column - matches original layout container */}
                 <div className="desktop-only" />
             </div>
         </section>
     );
 };
 
-export default TrustedBy;
+export default ImpactStatement;

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import TrustedBy from './components/TrustedBy';
+import ImpactStatement from './components/ImpactStatement';
 
 import IndustryProblem from './components/IndustryProblem';
 import RisingBlocks3D from './components/RisingBlocks';
@@ -108,7 +108,7 @@ function App() {
             {/* Main Sections */}
             <div className="content-reveal" style={{ position: 'relative', zIndex: 1 }}>
                 <Hero />
-                <div className="reveal-section"><TrustedBy /></div>
+                <div className="reveal-section"><ImpactStatement /></div>
                 <div className="reveal-section"><IndustryProblem /></div>
                 <div id="approach-spacer" style={{ height: '15vh', pointerEvents: 'none' }} />
                 <div className="reveal-section"><RisingBlocks3D /></div>
