@@ -1,8 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Zap, Lock } from 'lucide-react';
+import { Cpu, Code, Share2 } from 'lucide-react';
 
 const Hero = () => {
+    const scrollToSection = (id) => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <section id="hero" style={{ padding: 0, position: 'relative', overflow: 'hidden', background: 'transparent' }}>
             {/* Hero Content */}
@@ -33,7 +40,7 @@ const Hero = () => {
                             display: 'block',
                             marginBottom: '1rem'
                         }}>
-                            Operational Intelligence at Scale
+                            TECHNOLOGY LAB & PRODUCT STUDIO
                         </span>
                         <h1 style={{
                             fontSize: 'clamp(3rem, 10vw, 6rem)',
@@ -43,8 +50,8 @@ const Hero = () => {
                             textAlign: 'left',
                             color: '#fff'
                         }}>
-                            Operational Speed. <br />
-                            <span className="gradient-text">Engineered.</span>
+                            We build software <br />
+                            <span className="gradient-text">that ships.</span>
                         </h1>
                         <p style={{
                             fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
@@ -54,21 +61,30 @@ const Hero = () => {
                             lineHeight: 1.6,
                             textAlign: 'left'
                         }}>
-                            Algoryx develops intelligent systems that eliminate process inefficiencies, reduce execution time, and enable organizations to operate with maximum performance and precision.
+                            Algoryx is a software company. We build tools we want to use—from developer platforms and graphics engines to AI tools and SaaS. No fluff, just good code.
                         </p>
 
                         <div style={{ display: 'flex', gap: '15px', pointerEvents: 'auto', flexWrap: 'wrap' }}>
-                            <button className="btn-primary" style={{ padding: '12px 32px' }}>Request a Consultation</button>
-                            <button style={{
-                                background: 'transparent',
-                                color: 'white',
-                                border: '1px solid rgba(255,255,255,0.2)',
-                                padding: '12px 32px',
-                                borderRadius: '12px',
-                                fontWeight: 600,
-                                fontSize: '0.95rem'
-                            }}>
-                                Explore Solutions
+                            <button 
+                                className="btn-primary" 
+                                style={{ padding: '12px 32px' }}
+                                onClick={() => scrollToSection('products')}
+                            >
+                                Current Products
+                            </button>
+                            <button 
+                                style={{
+                                    background: 'transparent',
+                                    color: 'white',
+                                    border: '1px solid rgba(255,255,255,0.2)',
+                                    padding: '12px 32px',
+                                    borderRadius: '12px',
+                                    fontWeight: 600,
+                                    fontSize: '0.95rem'
+                                }}
+                                onClick={() => scrollToSection('research')}
+                            >
+                                Future Initiatives
                             </button>
                         </div>
                     </motion.div>
@@ -82,9 +98,9 @@ const Hero = () => {
                         flexWrap: 'wrap'
                     }}>
                         {[
-                            { icon: <Shield size={18} />, label: "Real-time Isolation" },
-                            { icon: <Zap size={18} />, label: "Zero Latency Defense" },
-                            { icon: <Lock size={18} />, label: "Immutable Core" }
+                            { icon: <Cpu size={18} />, label: "AI Experiments" },
+                            { icon: <Code size={18} />, label: "Developer Tools" },
+                            { icon: <Share2 size={18} />, label: "Open Source" }
                         ].map((item, idx) => (
                             <motion.div
                                 key={idx}

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const CTA = () => {
     return (
-        <section id="cta" style={{ textAlign: 'center', minHeight: 'auto', padding: '100px 5%', background: '#000000' }}>
+        <section id="contact" style={{ textAlign: 'center', minHeight: 'auto', padding: '100px 5%', background: '#000000' }}>
             <div className="glass-card" style={{
                 maxWidth: '1100px',
                 width: '100%',
@@ -19,15 +19,19 @@ const CTA = () => {
                     transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                 >
                     <h2 style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontWeight: 800, marginBottom: '24px', lineHeight: 1.1, color: '#fff' }}>
-                        Time is a business asset. <br />
-                        <span className="gradient-text">We help you reclaim it.</span>
+                        Let's work <br />
+                        <span className="gradient-text">together.</span>
                     </h2>
                     <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '48px', fontSize: 'clamp(1.1rem, 2.5vw, 1.25rem)', maxWidth: '650px', margin: '0 auto 48px', lineHeight: 1.6 }}>
-                        Operational acceleration must never compromise system integrity. Join the evolution of operational intelligence.
+                        Want to partner on a project, chat about developer tools, or join our team? Drop us a line.
                     </p>
                     <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                        <button className="btn-primary" style={{ padding: '16px 48px', fontSize: '1.1rem', width: 'clamp(250px, 100%, 300px)' }}>
-                            Request a Consultation
+                        <button 
+                            className="btn-primary" 
+                            style={{ padding: '16px 48px', fontSize: '1.1rem', width: 'clamp(250px, 100%, 300px)' }}
+                            onClick={() => window.location.href = 'mailto:contact@algoryx.com'}
+                        >
+                            Email us
                         </button>
                         <button style={{
                             background: 'rgba(255,255,255,0.05)',
@@ -40,10 +44,16 @@ const CTA = () => {
                             width: 'clamp(250px, 100%, 300px)',
                             transition: '0.3s'
                         }}
+                            onClick={() => {
+                                const careersSection = document.getElementById('company');
+                                if (careersSection) {
+                                    careersSection.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}
                             onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.1)'}
                             onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.05)'}
                         >
-                            Talk to Sales
+                            See open roles
                         </button>
                     </div>
                 </motion.div>

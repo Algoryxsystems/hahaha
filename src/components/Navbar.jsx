@@ -1,24 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState(null);
+    const [activeSection, setActiveSection] = useState('');
+    const [isObjectsPage, setIsObjectsPage] = useState(false);
+
+    useEffect(() => {
+        setIsObjectsPage(window.location.pathname.includes('objects.html'));
+    }, []);
+
+    useEffect(() => {
+        if (isObjectsPage) {
+            setActiveSection('/objects.html');
+            return;
+        }
+
+        const handleScroll = () => {
+            const sections = ['about', 'products', 'research', 'careers', 'contact'];
+            const scrollPosition = window.scrollY + 120; // Offset for navbar height and breathing room
+
+            for (const section of sections) {
+                const el = document.getElementById(section);
+                if (el) {
+                    const top = el.offsetTop;
+                    const height = el.offsetHeight;
+                    if (scrollPosition >= top && scrollPosition < top + height) {
+                        setActiveSection(`#${section}`);
+                        break;
+                    }
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [isObjectsPage]);
 
     const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
     const navLinks = [
+        { name: 'About', href: isObjectsPage ? '/index.html#about' : '#about' },
         {
             name: 'Products',
-            href: '#product',
+            href: isObjectsPage ? '/index.html#products' : '#products',
             dropdown: [
-                { name: 'Breakpoint', href: 'https://breakpoint-web-one.vercel.app', external: true }
+                { name: 'Breakpoint', href: 'https://breakpoint-web-one.vercel.app', external: true },
+                { name: 'Developer Tools', href: isObjectsPage ? '/index.html#products' : '#products' },
+                { name: 'AI Systems', href: isObjectsPage ? '/index.html#products' : '#products' }
             ]
         },
-        { name: 'Solutions', href: '#solutions' },
-        { name: 'Security', href: '#security' },
-        { name: 'Company', href: '#company' }
+        { name: '3D Objects', href: '/objects.html' },
+        { name: 'Research', href: isObjectsPage ? '/index.html#research' : '#research' },
+        { name: 'Careers', href: isObjectsPage ? '/index.html#careers' : '#careers' },
+        { name: 'Contact', href: isObjectsPage ? '/index.html#contact' : '#contact' }
     ];
 
     return (
@@ -65,11 +103,14 @@ const Navbar = () => {
                                 whileHover={{ color: '#fff' }}
                                 style={{
                                     textDecoration: 'none',
-                                    color: 'inherit',
+                                    color: activeSection === item.href ? '#fff' : 'inherit',
+                                    fontWeight: activeSection === item.href ? 600 : 500,
                                     transition: '0.3s',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: '6px'
+                                    gap: '6px',
+                                    borderBottom: activeSection === item.href ? '2px solid var(--accent-purple)' : '2px solid transparent',
+                                    paddingBottom: '4px'
                                 }}
                             >
                                 {item.name}
@@ -173,9 +214,9 @@ const Navbar = () => {
                                     onClick={() => !item.dropdown && setIsMenuOpen(false)}
                                     style={{
                                         textDecoration: 'none',
-                                        color: '#fff',
+                                        color: activeSection === item.href ? 'var(--accent-purple)' : '#fff',
                                         fontSize: '1.1rem',
-                                        fontWeight: 500,
+                                        fontWeight: activeSection === item.href ? 700 : 500,
                                         padding: '10px 0',
                                         display: 'flex',
                                         alignItems: 'center',

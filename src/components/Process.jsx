@@ -2,10 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const steps = [
-    { number: "01", title: "Process Analysis", desc: "Identify delays and inefficiencies in your current execution pipelines." },
-    { number: "02", title: "System Engineering", desc: "Design optimized frameworks tailored to your organizational needs." },
-    { number: "03", title: "Deployment", desc: "Implement scalable solutions with minimal disruption to ongoing operations." },
-    { number: "04", title: "Performance Optimization", desc: "Continuously monitor and enhance output for maximum precision." }
+    { number: "01", title: "Find the problem", desc: "Figure out what's broken, what's slow, or what could be engineered better." },
+    { number: "02", title: "Build a prototype", desc: "Code a quick version to test feasibility, performance, and user experience." },
+    { number: "03", title: "Ship it", desc: "Deploy the first stable release and invite developers to break it." },
+    { number: "04", title: "Iterate & polish", desc: "Fix bugs, optimize bottlenecks, and add features based on actual use." }
 ];
 
 const Process = () => {
@@ -14,10 +14,10 @@ const Process = () => {
             <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: '80px' }}>
                     <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 800, marginBottom: '20px' }}>
-                        The <span className="gradient-text">Algoryx Workflow</span>
+                        How we <span className="gradient-text">build things</span>
                     </h2>
                     <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '600px', margin: '0 auto', fontSize: 'clamp(1rem, 2vw, 1.15rem)' }}>
-                        A precision-engineered approach to transforming your operational potential.
+                        Our process is straightforward. No endless meetings, just iterative shipping.
                     </p>
                 </div>
 

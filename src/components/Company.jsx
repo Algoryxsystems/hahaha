@@ -11,21 +11,21 @@ const Company = () => {
                             About US
                         </span>
                         <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 800, margin: '20px 0', lineHeight: 1.1 }}>
-                            Engineers of <br />
-                            <span className="gradient-text">Operational Intelligence.</span>
+                            We write <br />
+                            <span className="gradient-text">code.</span>
                         </h2>
                         <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 'clamp(1rem, 2vw, 1.2rem)', lineHeight: 1.7, marginBottom: '30px' }}>
-                            Algoryx is a technology organization specializing in operational acceleration systems. We design intelligent solutions that enhance productivity, reduce execution delays, and optimize business processes at scale.
+                            Algoryx is a software lab. We're a small team of engineers and designers who build tools for the modern web. We focus on clean architecture, performance, and developer utility.
                         </p>
 
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '30px', marginTop: '60px' }}>
                             <div>
                                 <h4 style={{ color: '#fff', marginBottom: '10px' }}>Mission</h4>
-                                <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.9rem' }}>To reduce time wastage in industrial and organizational processes through precision-engineered technology systems.</p>
+                                <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.9rem' }}>Build software that works, open-source the core primitives, and help developers ship things faster.</p>
                             </div>
                             <div>
                                 <h4 style={{ color: '#fff', marginBottom: '10px' }}>Vision</h4>
-                                <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.9rem' }}>To lead the evolution of operational intelligence where efficiency and speed define modern industry performance.</p>
+                                <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.9rem' }}>A software lab where solid engineering and creative frontend design come together to ship great products.</p>
                             </div>
                         </div>
                     </div>
@@ -34,11 +34,11 @@ const Company = () => {
                         <h3 style={{ fontSize: '1.5rem', marginBottom: '30px', color: '#fff' }}>Core Values</h3>
                         <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '20px' }}>
                             {[
-                                "Efficiency-Driven Innovation",
-                                "Engineering Precision",
-                                "Security by Design",
-                                "Scalable Architecture",
-                                "Long-Term Reliability"
+                                "Ship code weekly",
+                                "Performance first",
+                                "Design is in the details",
+                                "Modular structures",
+                                "Open source first"
                             ].map((v, i) => (
                                 <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '15px', color: 'rgba(255,255,255,0.7)', fontSize: '0.95rem' }}>
                                     <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent-purple)', flexShrink: 0 }} />
@@ -48,13 +48,14 @@ const Company = () => {
                         </ul>
 
                         <div style={{ marginTop: '50px', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '40px' }}>
-                            <h3 style={{ fontSize: '1.5rem', marginBottom: '20px', color: '#fff' }}>Who We Serve</h3>
+                            <h3 style={{ fontSize: '1.5rem', marginBottom: '20px', color: '#fff' }}>We focus on</h3>
                             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
                                 {[
-                                    "Tech-driven enterprises",
-                                    "Operations-heavy industries",
-                                    "Growing organizations",
-                                    "Time-sensitive teams"
+                                    "Machine Learning",
+                                    "Dev Tools",
+                                    "SaaS Utilities",
+                                    "Open Source",
+                                    "WebGL & 3D"
                                 ].map((tag, i) => (
                                     <span key={i} style={{ padding: '8px 16px', borderRadius: '30px', background: 'rgba(255,255,255,0.05)', fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)', border: '1px solid rgba(255,255,255,0.05)' }}>
                                         {tag}

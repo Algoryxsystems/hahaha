@@ -4,10 +4,10 @@ import * as THREE from 'three';
 import { EffectComposer, Bloom, Vignette, Noise } from '@react-three/postprocessing';
 import gsap from 'gsap';
 
-const PARTICLE_COUNT = 150000;
+export const PARTICLE_COUNT = 150000;
 
 // Utility to sample the logo image for particle targets
-const sampleLogo = (img, count) => {
+export const sampleLogo = (img, count) => {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = img.width;
@@ -68,7 +68,7 @@ const sampleLogo = (img, count) => {
     return result;
 };
 
-const CinematicParticles = ({ targetPositions }) => {
+export const CinematicParticles = ({ targetPositions, progress, count = PARTICLE_COUNT, autoplay = false, shift = 7.2 }) => {
     const pointsRef = useRef();
     const materialRef = useRef();
     const { camera, gl } = useThree();
@@ -79,26 +79,41 @@ const CinematicParticles = ({ targetPositions }) => {
     }, [gl]);
 
     const [chaosPositions, seeds] = useMemo(() => {
-        const pos = new Float32Array(PARTICLE_COUNT * 3);
-        const s = new Float32Array(PARTICLE_COUNT);
-        for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const pos = new Float32Array(count * 3);
+        const s = new Float32Array(count);
+        for (let i = 0; i < count; i++) {
             pos[i * 3] = (Math.random() - 0.5) * 60;
             pos[i * 3 + 1] = (Math.random() - 0.5) * 60;
             pos[i * 3 + 2] = (Math.random() - 0.5) * 60;
             s[i] = Math.random();
         }
         return [pos, s];
-    }, []);
+    }, [count]);
+
+    const slicedTargetPositions = useMemo(() => {
+        if (!targetPositions) return new Float32Array(count * 3);
+        if (targetPositions.length === count * 3) return targetPositions;
+        return targetPositions.slice(0, count * 3);
+    }, [targetPositions, count]);
 
     useFrame((state) => {
         if (materialRef.current) {
             materialRef.current.uniforms.uTime.value = state.clock.elapsedTime;
-            // progressObj is attached to scene.userData
-            if (state.scene.userData.val !== undefined) {
+            
+            // If autoplay is enabled, loop progress from 0 to 3 over 15 seconds
+            if (autoplay) {
+                const p = (state.clock.getElapsedTime() * 0.2) % 3;
+                materialRef.current.uniforms.uProgress.value = p;
+            } else if (progress !== undefined) {
+                materialRef.current.uniforms.uProgress.value = progress;
+            } else if (state.scene.userData.val !== undefined) {
                 materialRef.current.uniforms.uProgress.value = state.scene.userData.val;
             }
+            
             if (state.scene.userData.shift !== undefined) {
                 materialRef.current.uniforms.uShift.value = state.scene.userData.shift;
+            } else {
+                materialRef.current.uniforms.uShift.value = shift;
             }
         }
 
@@ -111,10 +126,10 @@ const CinematicParticles = ({ targetPositions }) => {
     return (
         <points ref={pointsRef}>
             <bufferGeometry>
-                <bufferAttribute attach="attributes-position" count={PARTICLE_COUNT} array={chaosPositions} itemSize={3} />
-                <bufferAttribute attach="attributes-chaosPosition" count={PARTICLE_COUNT} array={chaosPositions} itemSize={3} />
-                <bufferAttribute attach="attributes-targetPosition" count={PARTICLE_COUNT} array={targetPositions} itemSize={3} />
-                <bufferAttribute attach="attributes-seed" count={PARTICLE_COUNT} array={seeds} itemSize={1} />
+                <bufferAttribute attach="attributes-position" count={count} array={chaosPositions} itemSize={3} />
+                <bufferAttribute attach="attributes-chaosPosition" count={count} array={chaosPositions} itemSize={3} />
+                <bufferAttribute attach="attributes-targetPosition" count={count} array={slicedTargetPositions} itemSize={3} />
+                <bufferAttribute attach="attributes-seed" count={count} array={seeds} itemSize={1} />
             </bufferGeometry>
             <shaderMaterial
                 ref={materialRef}
@@ -123,7 +138,7 @@ const CinematicParticles = ({ targetPositions }) => {
                 uniforms={{
                     uTime: { value: 0 },
                     uProgress: { value: 0 },
-                    uShift: { value: 0 }
+                    uShift: { value: shift }
                 }}
                 vertexShader={`
                     uniform float uTime;
@@ -140,9 +155,9 @@ const CinematicParticles = ({ targetPositions }) => {
                         float p = uProgress;
                         vec3 pos;
                         
-                        // RIGHT SHIFT: Pushed further right for maximum breathing room
+                        // RIGHT SHIFT: Pushed further right or centered dynamically
                         vec3 shiftedTarget = targetPosition;
-                        shiftedTarget.x += 7.2;
+                        shiftedTarget.x += uShift;
 
                         if (p <= 1.0) {
                             // PHASE 1: Chaos -> Logo (Assembling)
@@ -217,65 +232,96 @@ const CinematicParticles = ({ targetPositions }) => {
     );
 };
 
-const CinematicSequence = () => {
+const CinematicSequence = ({ isSiteReady }) => {
     const [targetPositions, setTargetPositions] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const containerRef = useRef();
     const progressObj = useRef({ val: 0 });
 
     useEffect(() => {
+        console.log("CinematicSequence: Starting image load");
         const img = new Image();
-        img.src = '/assets/logo-shape.png';
         img.crossOrigin = "Anonymous";
-        img.onerror = () => {
-            img.src = 'ChatGPT Image Feb 10, 2026, 10_55_50 PM (1).png';
-        };
+
         img.onload = () => {
+            console.log("CinematicSequence: Image loaded successfully");
             setTargetPositions(sampleLogo(img, PARTICLE_COUNT));
             setIsLoading(false);
+        };
 
-            // MASTER CINEMATIC TIMELINE: Unified for perfect bi-directional sync
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: "#hero",
-                    start: "top top",
-                    endTrigger: "#approach-spacer",
-                    end: "bottom top",
-                    scrub: true, // Absolute 1:1 link for zero lag in both directions
-                }
-            });
+        img.onerror = () => {
+            console.warn("CinematicSequence: Primary image failed, trying fallback");
+            const fallbackImg = new Image();
+            fallbackImg.crossOrigin = "Anonymous";
+            
+            fallbackImg.onload = () => {
+                console.log("CinematicSequence: Fallback image loaded successfully");
+                setTargetPositions(sampleLogo(fallbackImg, PARTICLE_COUNT));
+                setIsLoading(false);
+            };
 
-            // 1. ASSEMBLE: 0->1 over the Hero section
-            tl.to(progressObj.current, {
-                val: 1,
-                duration: 10,
-                ease: "none"
-            });
+            fallbackImg.onerror = () => {
+                console.error("CinematicSequence: Failed to load both primary and fallback assets.");
+                setTargetPositions(new Float32Array(PARTICLE_COUNT * 3));
+                setIsLoading(false);
+            };
 
-            // 2. SOLID STATE: Holds 1->2.0 over the Impact Statement section
-            // Phase 2 (Solid) is 1.0 to 2.0 in the shader
-            tl.to(progressObj.current, {
-                val: 2.0,
-                duration: 6,
-                ease: "none"
-            });
+            fallbackImg.src = 'ChatGPT Image Feb 10, 2026, 10_55_50 PM (1).png';
+        };
 
-            // 3. REVERSE DISPERSAL: SHATTERS AS YOU ENTER THE INDUSTRY PROBLEM
-            // Phase 3 starts at val=2.0
-            tl.to(progressObj.current, {
-                val: 3.0,
-                duration: 12,
-                ease: "none"
-            });
+        img.src = '/assets/logo-shape.png';
+    }, []);
 
-            // Stage 4: Master Canvas Fade-out over the Spacer
+    useEffect(() => {
+        if (isLoading) return;
+        
+        console.log("CinematicSequence: Initializing GSAP timeline, containerRef.current =", containerRef.current);
+        
+        // MASTER CINEMATIC TIMELINE: Unified for perfect bi-directional sync
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#hero",
+                start: "top top",
+                endTrigger: "#approach-spacer",
+                end: "bottom top",
+                scrub: true, // Absolute 1:1 link for zero lag in both directions
+            }
+        });
+
+        // 1. ASSEMBLE: 0->1 over the Hero section
+        tl.to(progressObj.current, {
+            val: 1,
+            duration: 10,
+            ease: "none"
+        });
+
+        // 2. SOLID STATE: Holds 1->2.0 over the Impact Statement section
+        tl.to(progressObj.current, {
+            val: 2.0,
+            duration: 6,
+            ease: "none"
+        });
+
+        // 3. REVERSE DISPERSAL: SHATTERS AS YOU ENTER THE INDUSTRY PROBLEM
+        tl.to(progressObj.current, {
+            val: 3.0,
+            duration: 12,
+            ease: "none"
+        });
+
+        // Stage 4: Master Canvas Fade-out over the Spacer
+        if (containerRef.current) {
             tl.to(containerRef.current, {
                 opacity: 0,
                 duration: 2,
                 ease: "none"
             });
+        }
+
+        return () => {
+            tl.kill();
         };
-    }, []);
+    }, [isLoading]);
 
     if (isLoading) return <div style={{ background: '#000', width: '100vw', height: '100vh', position: 'fixed', zIndex: -1 }} />;
 
@@ -290,18 +336,20 @@ const CinematicSequence = () => {
             zIndex: 0,
             pointerEvents: 'none'
         }}>
-            <Canvas
-                dpr={[1, 1.5]}
-                gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
-                camera={{ position: [0, 0, 25], fov: 40 }}
-            >
-                <primitive object={progressObj.current} attach="userData" />
-                <CinematicParticles targetPositions={targetPositions} />
-                <EffectComposer multisampling={0}>
-                    <Bloom intensity={0.1} luminanceThreshold={0.9} />
-                </EffectComposer>
-                <ambientLight intensity={0.5} />
-            </Canvas>
+            {isSiteReady && (
+                <Canvas
+                    dpr={[1, 1.5]}
+                    gl={{ antialias: false, alpha: true, powerPreference: 'high-performance' }}
+                    camera={{ position: [0, 0, 25], fov: 40 }}
+                >
+                    <primitive object={progressObj.current} attach="userData" />
+                    <CinematicParticles targetPositions={targetPositions} />
+                    <EffectComposer multisampling={0}>
+                        <Bloom intensity={0.1} luminanceThreshold={0.9} />
+                    </EffectComposer>
+                    <ambientLight intensity={0.5} />
+                </Canvas>
+            )}
         </div>
     );
 };

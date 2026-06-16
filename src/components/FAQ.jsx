@@ -4,24 +4,24 @@ import { ChevronDown } from 'lucide-react';
 
 const faqs = [
     {
-        q: "What is Algoryx’s specialization?",
-        a: "Time-optimization and operational efficiency technologies for high-performance organizations."
+        q: "What is Algoryx?",
+        a: "We're a software studio. We design, build, and ship products like developer tools, AI utilities, and SaaS portals."
     },
     {
-        q: "Who benefits most from Algoryx solutions?",
-        a: "Organizations dependent on fast, reliable execution processes, from logistics to software infrastructure."
+        q: "What are you currently working on?",
+        a: "Our main project is Breakpoint, a security analysis tool. We also build browser extensions, WebGL libraries, and utility scripts."
     },
     {
-        q: "Is integration complex?",
-        a: "Not at all. Our modular architecture supports scalable, structured integration with your existing systems."
+        q: "Are these projects related?",
+        a: "They are all built by the same core team at Algoryx, but each project runs independently with its own repository and roadmap."
     },
     {
-        q: "Do you provide support?",
-        a: "Yes. Ongoing optimization and dedicated support services are available to all our partners."
+        q: "How can we collaborate?",
+        a: "If you're a developer, founder, or looking to partner with us, drop us a line at contact@algoryx.com."
     },
     {
-        q: "How do we start?",
-        a: "Submit a consultation request via our website to analyze your operational requirements and identify key delays."
+        q: "Do you do client work?",
+        a: "Mainly we build our own tools, but we occasionally partner with teams on custom WebGL, graphics, or systems projects. Let's chat."
     }
 ];
 

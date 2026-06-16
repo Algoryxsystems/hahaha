@@ -1,0 +1,690 @@
+# Algoryx Project - Prompt Log
+All user prompts from the start of this project, in chronological order.
+
+============================================================
+
+### Prompt 1
+create a new folder and clone this to that folder https://github.com/Algoryxsystems/hahaha
+
+----------------------------------------
+
+### Prompt 2
+check wether it has any compile time and runtime errors
+
+----------------------------------------
+
+### Prompt 3
+yeah do whatever u want but dont fuck up
+
+----------------------------------------
+
+### Prompt 4
+hey listen add a new section to the website named 3d objects and  extract all the 3d objects in the current website and all those to 3d objects section the 3d elements should be present in overall website and also in 3d objects section
+
+----------------------------------------
+
+### Prompt 5
+# Algoryx Website Enhancement – 3D Objects Showcase
+
+## Objective
+
+Create a dedicated "3D Objects" section that showcases Algoryx's interactive 3D systems in a reusable gallery format while preserving the original implementations elsewhere on the website.
+
+The section will act as:
+
+* A showcase of Algoryx's visual engineering capabilities
+* A foundation for a future public 3D asset library
+* A scalable architecture for community-uploaded models
+
+---
+
+# Phase 1 – Reusable Component Extraction
+
+## RisingBlocks.jsx
+
+### Changes
+
+Export:
+
+```jsx
+InstancedNeuralGrid
+```
+
+### Requirements
+
+* Remove section-specific dependencies
+* Accept configurable props:
+
+  * interactive
+  * rippleStrength
+  * gridSize
+  * autoRotate
+
+---
+
+## RobotSection.jsx
+
+### Changes
+
+Export:
+
+```jsx
+ImageMatchedRobot
+```
+
+### Requirements
+
+* Cursor tracking should be optional
+* Add sensitivity prop
+* Add idle animation fallback
+
+---
+
+## CinematicSequence.jsx
+
+### Changes
+
+Export:
+
+```jsx
+CinematicParticles
+sampleLogo
+PARTICLE_COUNT
+```
+
+### Requirements
+
+* Independent timeline instance
+* No shared animation state
+* Optional autoplay prop
+
+---
+
+# Phase 2 – New ThreeDObjects Component
+
+## New File
+
+```jsx
+src/components/ThreeDObjects.jsx
+```
+
+### Section ID
+
+```html
+<section id="objects">
+```
+
+---
+
+## Layout
+
+Responsive grid
+
+Desktop:
+
+```text
+[ Neural Grid ] [ Robot ]
+[ Particle Cloud ]
+```
+
+or
+
+```text
+[ Grid ] [ Robot ] [ Cloud ]
+```
+
+Mobile:
+
+```text
+Grid
+Robot
+Cloud
+```
+
+---
+
+## Section Header
+
+Title:
+
+```text
+Interactive 3D Systems
+```
+
+Subtitle:
+
+```text
+Explore the real-time visual technologies powering Algoryx experiences.
+```
+
+---
+
+# Card 1 – Interactive Neural Grid
+
+### Canvas
+
+React Three Fiber
+
+### Interaction
+
+Hover
+
+Mouse ripple
+
+Block displacement
+
+Subtle glow increase
+
+### Performance
+
+Pause updates when card is outside viewport
+
+---
+
+# Card 2 – Core 
+<truncated 1473 bytes>
+
+# Phase 6 – Accessibility
+
+Add:
+
+* keyboard focus states
+* aria labels
+* reduced motion support
+
+Respect:
+
+```css
+prefers-reduced-motion
+```
+
+---
+
+# Phase 7 – Future 3D Asset Platform Foundation
+
+Prepare architecture now.
+
+Each card should internally use:
+
+```ts
+interface ObjectMetadata {
+  id: string
+  title: string
+  description: string
+  previewImage: string
+  tags: string[]
+}
+```
+
+This allows future migration into:
+
+```text
+Algoryx 3D Hub
+```
+
+without rewriting components.
+
+---
+
+# Phase 8 – Analytics
+
+Track:
+
+* section views
+* card interactions
+* hover duration
+* clicks
+
+Useful for determining which 3D assets attract users.
+
+---
+
+# Verification Plan
+
+## Build Verification
+
+```bash
+npm run build
+```
+
+Confirm:
+
+* no import errors
+* no tree-shaking issues
+* no duplicate Three.js instances
+
+---
+
+## Runtime Verification
+
+```bash
+npm run dev
+```
+
+Verify:
+
+* Navbar link works
+* Smooth scroll works
+* GSAP reveal works
+* Desktop responsiveness
+* Mobile responsiveness
+* No console warnings
+
+---
+
+## Interaction Verification
+
+Neural Grid
+
+✓ Ripple follows cursor
+
+✓ Smooth recovery
+
+✓ No FPS drops
+
+Robot Head
+
+✓ Tracks pointer
+
+✓ Returns to neutral position
+
+✓ Idle animation active
+
+Particle Cloud
+
+✓ Loops continuously
+
+✓ No memory leaks
+
+✓ Stable frame rate
+
+---
+
+## Regression Testing
+
+Verify original:
+
+* Hero Neural Grid
+* Robot Section
+* Cinematic Sequence
+
+continue operating independently and do not share animation state with the new showcase instances.
+
+---
+
+# Future Roadmap
+
+Version 1:
+
+* Showcase only
+
+Version 2:
+
+* Downloadable Algoryx assets
+
+Version 3:
+
+* User uploads
+
+Version 4:
+
+* Public creator profiles
+
+Version 5:
+
+* Asset marketplace and premium subscriptions follow this implementation plan and do everythinng as mentioned
+
+----------------------------------------
+
+### Prompt 6
+what the fuck is this the 3d objects section isnt fucking not opening what the fuck is this im fucking disappointed by u  builld it properly and give a final running thing dont stop till then work on it
+
+----------------------------------------
+
+### Prompt 7
+i dont want it  as a  section in the homepage i want it like a new redirect in a new page displaying only  3d objects
+
+----------------------------------------
+
+### Prompt 8
+when we click on the particular 3d element card then it  should open on a full screen display and then user can perform scrolls and other options and can experience it properly and also should have a glb download option so that user can directly download the 3d objects
+
+----------------------------------------
+
+### Prompt 9
+it should go to fucking redirect and display everything not on the same fucking page make a new redirect for clarity display
+
+----------------------------------------
+
+### Prompt 10
+in the 3rd 3d element it isnt forming properly its just displaying some dust particles that particles should form the algoryx logo
+
+----------------------------------------
+
+### Prompt 11
+remove the 3rd 3d object
+
+----------------------------------------
+
+### Prompt 12
+and then implement this # ALGORYX REBRANDING MASTER PROMPT
+
+Transform the entire Algoryx website from a cybersecurity-focused product website into a premium technology company website that represents Algoryx as a multi-product innovation company.
+
+IMPORTANT:
+
+DO NOT MODIFY, REMOVE, REPLACE, REDESIGN, REPOSITION, OR ALTER ANY EXISTING 3D SYSTEMS.
+
+Protected Elements:
+
+* Neural Grid
+* Robot Head
+* Cinematic Particle System
+* 3D Objects Showcase Section
+* All Three.js Components
+* React Three Fiber Logic
+* GSAP 3D Timelines
+* Particle Simulations
+* Canvas Configurations
+* WebGL Effects
+* Mouse Interaction Systems
+* Scroll-Based 3D Animations
+* 3D Objects Redirect Page
+* Future Asset Library Infrastructure
+
+These systems are considered production-ready and must remain visually and functionally identical.
+
+The redesign must focus only on positioning, messaging, information architecture, branding, business structure, typography hierarchy, content strategy, and company presentation.
+
+---
+
+NEW COMPANY POSITIONING
+
+Algoryx is NOT a cybersecurity company.
+
+Algoryx is a technology innovation company that designs, builds, and launches products across multiple domains.
+
+The website should communicate:
+
+"Algoryx creates products, platforms, tools, digital experiences, and intelligent systems."
+
+The company should feel capable of launching:
+
+* AI Products
+* Developer Tools
+* SaaS Platforms
+* Cybersecurity Products
+* Browser Extensions
+* Creative Technology
+* Open Source Initiatives
+* 3D Asset Platforms
+* Experimental Technologies
+* Future Ventures
+
+The company identity should be broader than any single product.
+
+---
+
+PRIMARY BRAND MESSAGE
+
+Replace product-centric messaging with company-centric messaging.
+
+Avoid:
+
+* Cybersecurity-first wording
+* Security company language
+* Threat detection language as primary identity
+* Product-specific homepage positioning
+
+Instead communicate:
+
+Innovation
+Engineering
+Technology
+Products
+Research
+Digital 
+<truncated 1690 bytes>
+UST & CREDIBILITY
+
+Add professional trust signals.
+
+Possible sections:
+
+Projects Built
+
+Products Released
+
+Technologies Used
+
+Development Areas
+
+Innovation Focus
+
+Roadmap Highlights
+
+The website should feel investable.
+
+---
+
+DESIGN LANGUAGE
+
+Maintain:
+
+Dark premium aesthetic
+
+High-end visuals
+
+Cinematic motion
+
+Immersive interactions
+
+Technical sophistication
+
+Avoid:
+
+Cyberpunk hacker aesthetics
+
+Matrix-style visuals
+
+Red warning colors
+
+Threat dashboards
+
+Security alert styling
+
+Anonymous hacker imagery
+
+Replace with:
+
+Premium technology company styling
+
+Product ecosystem styling
+
+Modern innovation branding
+
+Enterprise-ready presentation
+
+---
+
+TYPOGRAPHY
+
+Increase hierarchy clarity.
+
+Use:
+
+Large executive headlines
+
+Concise supporting copy
+
+Business-focused messaging
+
+Professional terminology
+
+Avoid excessive buzzwords.
+
+---
+
+ANIMATION POLICY
+
+Keep all animations.
+
+Keep all motion systems.
+
+Keep all scroll systems.
+
+Keep all 3D interactions.
+
+Only refine supporting UI transitions if needed.
+
+No animation removals.
+
+No WebGL removals.
+
+No performance regressions.
+
+---
+
+3D OBJECTS SECTION
+
+DO NOT MODIFY.
+
+DO NOT RESTRUCTURE.
+
+DO NOT REMOVE.
+
+DO NOT REPOSITION.
+
+DO NOT ALTER FUNCTIONALITY.
+
+DO NOT CHANGE INTERACTIONS.
+
+Only ensure visual consistency with the updated company branding.
+
+---
+
+FUTURE SCALABILITY
+
+Design the website so Algoryx can add:
+
+10+
+
+20+
+
+50+
+
+Products in the future without redesigning the company identity.
+
+The company brand must always remain larger than any individual product.
+
+---
+
+FINAL GOAL
+
+The final website should feel comparable to a modern technology company, startup studio, or innovation lab.
+
+Visitors should leave thinking:
+
+"Algoryx is building an ecosystem of technology products."
+
+NOT:
+
+"Algoryx is a cybersecurity product."
+
+----------------------------------------
+
+### Prompt 13
+Continue
+
+----------------------------------------
+
+### Prompt 14
+go  with the implementation plan
+
+----------------------------------------
+
+### Prompt 15
+continue
+
+----------------------------------------
+
+### Prompt 16
+why only sections have changed not the  content of the sections check and fix everything properly
+
+----------------------------------------
+
+### Prompt 17
+when clicked on download glb asset its fucking showing an error popup message
+
+----------------------------------------
+
+### Prompt 18
+yeah good but the overall websites looks like ai made and also sounding like ai made check that and fix the terms thats making this sound like the ai made
+
+----------------------------------------
+
+### Prompt 19
+all the 3d objects effects like hover and mouse tracking and all other from now on should exist in glb not just in runtime of the website check and fix that
+
+----------------------------------------
+
+### Prompt 20
+go with the implementation plan
+
+----------------------------------------
+
+### Prompt 21
+generate a text file named prompts and include all the prompts from the start of this project and also continue recording prompts into that text file
+
+----------------------------------------
+
+### Prompt 22
+continue
+
+----------------------------------------
+
+### Prompt 23
+continue
+
+----------------------------------------
+
+### Prompt 24
+continue
+
+----------------------------------------
+
+### Prompt 25
+the website isnt fucking loading fix that
+
+----------------------------------------
+
+### Prompt 26
+and also fix it and push it hahaha repo
+
+----------------------------------------
+
+### Prompt 27
+and are u storing all the prompts adnd for every sinngle change push the changes tp github
+
+----------------------------------------
+
+### Prompt 28
+what the fuck is this the website isnt even loading what the fuck is this u fucking bastard
+
+----------------------------------------
+
+### Prompt 29
+continue
+
+----------------------------------------
+
+### Prompt 30
+continue
+
+----------------------------------------
+
+### Prompt 31
+continue
+
+----------------------------------------
+

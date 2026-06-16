@@ -1,24 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import ImpactStatement from './components/ImpactStatement';
-
-import IndustryProblem from './components/IndustryProblem';
-import RisingBlocks3D from './components/RisingBlocks';
-import RobotSection from './components/RobotSection';
-import AnalyticsSection from './components/AnalyticsSection';
-import Company from './components/Company';
-import Process from './components/Process';
-import ResearchStandards from './components/Security';
-import Features from './components/Features';
-import FAQ from './components/FAQ';
-import CTA from './components/CTA';
-import Footer from './components/Footer';
-import CinematicSequence from './components/CinematicSequence';
-import Preloader from './components/Preloader';
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom/client';
+import Navbar from './components/Navbar.jsx';
+import ThreeDObjects from './components/ThreeDObjects.jsx';
+import Footer from './components/Footer.jsx';
+import Preloader from './components/Preloader.jsx';
+import Lenis from 'lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
+import './index.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,11 +25,14 @@ const GrainOverlay = () => (
     }} />
 );
 
-function App() {
+const ObjectsPage = () => {
     const [isSiteReady, setIsSiteReady] = useState(false);
 
     useEffect(() => {
-        // Initialize Lenis for professional smooth scrolling
+        // Reset scroll position on load
+        window.scrollTo(0, 0);
+
+        // Initialize Lenis for smooth scrolling
         const lenis = new Lenis({
             duration: 1.5,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -56,16 +48,13 @@ function App() {
             lenis.raf(time);
             requestAnimationFrame(raf);
         }
-
-        requestAnimationFrame(raf);
+        const rafId = requestAnimationFrame(raf);
 
         // Sync GSAP with Lenis
         lenis.on('scroll', ScrollTrigger.update);
-
         gsap.ticker.add((time) => {
             lenis.raf(time * 1000);
         });
-
         gsap.ticker.lagSmoothing(0);
 
         // Reveal animations on scroll
@@ -88,11 +77,12 @@ function App() {
             );
         });
 
-        // Ensure perfect reload positioning
+        ScrollTrigger.refresh();
+
         window.history.scrollRestoration = 'manual';
-        window.scrollTo(0, 0);
 
         return () => {
+            cancelAnimationFrame(rafId);
             lenis.destroy();
             ScrollTrigger.getAll().forEach(t => t.kill());
         };
@@ -102,31 +92,18 @@ function App() {
         <div className="app-container" style={{ background: '#000000', minHeight: '100vh', color: '#fff' }}>
             <Preloader onComplete={() => setIsSiteReady(true)} />
             <GrainOverlay />
-
-            {/* Background Animation Engine */}
-            <CinematicSequence isSiteReady={isSiteReady} />
-
             <Navbar />
-
-            {/* Main Sections */}
-            <div className="content-reveal" style={{ position: 'relative', zIndex: 1 }}>
-                <Hero />
-                <div className="reveal-section"><ImpactStatement /></div>
-                <div className="reveal-section"><IndustryProblem /></div>
-                <div id="approach-spacer" style={{ height: '15vh', pointerEvents: 'none' }} />
-                <div className="reveal-section"><RisingBlocks3D isSiteReady={isSiteReady} /></div>
-                <div className="reveal-section"><RobotSection isSiteReady={isSiteReady} /></div>
-                <div className="reveal-section"><AnalyticsSection /></div>
-                <div className="reveal-section"><Features /></div>
-                <div className="reveal-section"><Process /></div>
-                <div className="reveal-section"><Company /></div>
-                <div className="reveal-section"><ResearchStandards /></div>
-                <div className="reveal-section"><FAQ /></div>
-                <div className="reveal-section"><CTA /></div>
+            
+            <div style={{ paddingTop: '80px' }}>
+                <ThreeDObjects isSiteReady={isSiteReady} />
                 <Footer />
             </div>
         </div>
     );
-}
+};
 
-export default App;
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <ObjectsPage />
+    </React.StrictMode>,
+);

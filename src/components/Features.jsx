@@ -5,46 +5,46 @@ import { Cpu, ShieldCheck, Zap, Globe, Layers, Activity } from 'lucide-react';
 const features = [
     {
         icon: <Layers size={32} />,
-        title: "Workflow Optimization",
-        desc: "Improves process flow and reduces turnaround cycles across multi-stage operations."
+        title: "Breakpoint",
+        desc: "Security analysis, built for speed. Scans dependencies, flags vulnerabilities, and protects your network."
     },
     {
         icon: <Cpu size={32} />,
-        title: "Intelligent Automation",
-        desc: "Eliminates manual intervention in repetitive operations through intelligent frameworks."
+        title: "AI Systems",
+        desc: "Pragmatic AI. Developer autocomplete, log analysis, and semantic search interfaces that just work."
     },
     {
         icon: <Zap size={32} />,
-        title: "System Acceleration",
-        desc: "Enhances processing performance and operational speed of existing infrastructure."
+        title: "Developer Tools",
+        desc: "CLI tools and browser extensions. Designed to speed up your local workflow and save you keystrokes."
     },
     {
         icon: <Globe size={32} />,
-        title: "Operational Integration",
-        desc: "Unifies systems for faster, error-free information exchange and data pipelines."
+        title: "3D Asset Platform",
+        desc: "A collection of interactive WebGL components. Free to download, copy, and use in your own projects."
     },
     {
         icon: <ShieldCheck size={32} />,
-        title: "High-Speed Processing",
-        desc: "Precision-engineered frameworks designed to remove performance bottlenecks."
+        title: "Creative Tech",
+        desc: "WebGL playgrounds, canvas animations, and interactive frontend experiments."
     },
     {
         icon: <Activity size={32} />,
-        title: "Performance Analytics",
-        desc: "Modular integration architecture with advanced performance monitoring dashboards."
+        title: "Future Ventures",
+        desc: "We build and test ideas quickly, then ship the ones that show promise."
     }
 ];
 
 const Features = () => {
     return (
-        <section id="solutions" style={{ background: '#000000' }}>
+        <section id="products" style={{ background: '#000000' }}>
             <div className="container" style={{ maxWidth: '1200px', margin: '0 auto' }}>
                 <div style={{ textAlign: 'center', marginBottom: '80px' }}>
                     <h2 style={{ fontSize: '3rem', fontWeight: 800, marginBottom: '20px' }}>
-                        What We <span className="gradient-text">Deliver</span>
+                        What we're <span className="gradient-text">building</span>
                     </h2>
                     <p style={{ color: 'rgba(255,255,255,0.6)', maxWidth: '600px', margin: '0 auto' }}>
-                        Algoryx develops intelligent solutions that enhance productivity and optimize business processes at scale.
+                        We build standalone tools. Here's what's currently active in our software lab.
                     </p>
                 </div>
 
@@ -107,7 +107,7 @@ const Features = () => {
                         fontWeight: 500,
                         letterSpacing: '0.02em'
                     }}>
-                        <span style={{ color: 'var(--accent-purple)', fontWeight: 700 }}>Breakpoint:</span> Powering the next generation of security analysis and operational intelligence.
+                        <span style={{ color: 'var(--accent-purple)', fontWeight: 700 }}>Open Source first:</span> We write open-source code and build tools for developers. Check out our GitHub for more.
                     </p>
                 </motion.div>
             </div>

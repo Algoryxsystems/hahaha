@@ -38,32 +38,32 @@ const Footer = () => {
                         </span>
                     </div>
                     <p style={{ color: 'rgba(255,255,255,0.5)', maxWidth: '300px', lineHeight: 1.6, marginBottom: '25px' }}>
-                        The future of operational intelligence. Engineered for maximum speed and precision.
+                        We build developer tools, WebGL experiments, and SaaS platforms.
                     </p>
                     <div style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>
                         <p>General: contact@algoryx.com</p>
-                        <p>Sales: sales@algoryx.com</p>
+                        <p>Partnerships: partners@algoryx.com</p>
                         <p style={{ marginTop: '10px' }}>Mon – Fri, 9:00 AM – 6:00 PM IST</p>
                     </div>
                 </div>
 
                 {[
-                    { title: "Solutions", links: ["Process Acceleration", "Intelligent Automation", "System Optimization"] },
-                    { title: "Company", links: ["About Us", "Our Approach", "Security", "FAQ"] },
-                    { title: "Legal", links: ["Privacy Policy", "Terms & Conditions"] }
+                    { title: "Products", links: [{ name: "Breakpoint", href: "https://breakpoint-web-one.vercel.app" }, { name: "Developer Tools", href: "#products" }, { name: "AI Systems", href: "#products" }, { name: "3D Showcase", href: "/objects.html" }] },
+                    { title: "Company", links: [{ name: "About Us", href: "#about" }, { name: "Research", href: "#research" }, { name: "Careers", href: "#company" }, { name: "FAQ", href: "#faq" }] },
+                    { title: "Legal", links: [{ name: "Privacy Policy", href: "#" }, { name: "Terms & Conditions", href: "#" }] }
                 ].map((col, i) => (
                     <div key={i}>
                         <h4 style={{ marginBottom: '25px', fontSize: '1.1rem', color: '#fff' }}>{col.title}</h4>
                         <ul style={{ listStyle: 'none', padding: 0 }}>
                             {col.links.map((link, j) => (
                                 <li key={j} style={{ marginBottom: '12px' }}>
-                                    <a href="#" style={{
+                                    <a href={link.href} style={{
                                         color: 'rgba(255,255,255,0.5)',
                                         textDecoration: 'none',
                                         fontSize: '0.9rem',
                                         transition: '0.3s'
                                     }} className="footer-link">
-                                        {link}
+                                        {link.name}
                                     </a>
                                 </li>
                             ))}

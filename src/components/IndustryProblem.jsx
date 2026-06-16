@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { AlertCircle } from 'lucide-react';
+import { Layers } from 'lucide-react';
 
 const IndustryProblem = () => {
     return (
-        <section id="problem" style={{
+        <section id="about" style={{
             background: 'transparent',
             padding: '120px 0',
             minHeight: '100vh',
@@ -28,20 +28,20 @@ const IndustryProblem = () => {
                         gap: '10px',
                         padding: '8px 20px',
                         borderRadius: '30px',
-                        background: 'rgba(255, 0, 0, 0.05)',
-                        border: '1px solid rgba(255, 0, 0, 0.1)',
-                        color: '#ff4d4d',
+                        background: 'rgba(112, 0, 255, 0.05)',
+                        border: '1px solid rgba(112, 0, 255, 0.15)',
+                        color: 'var(--accent-purple)',
                         marginBottom: '30px',
                         fontSize: '0.9rem',
                         fontWeight: 600
                     }}>
-                        <AlertCircle size={18} />
-                        THE INDUSTRY CHALLENGE
+                        <Layers size={18} />
+                        THE MISSION
                     </div>
 
                     <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 900, marginBottom: '30px', lineHeight: 1.1, color: 'white' }}>
-                        Inefficiency is a <br />
-                        <span className="gradient-text-pink">Structural Business Risk.</span>
+                        We write code <br />
+                        <span className="gradient-text">that scales.</span>
                     </h2>
 
                     <p style={{
@@ -51,7 +51,7 @@ const IndustryProblem = () => {
                         marginBottom: '40px',
                         fontWeight: 300
                     }}>
-                        Across industries, operational delays, manual dependencies, and disconnected systems lead to measurable time loss, increased costs, and reduced scalability.
+                        Software has gotten too complicated. Stack traces are too long, configuration files are too big, and integration takes weeks. We build clean, modular tools that let engineers get back to coding.
                     </p>
 
                     <div className="glass-card" style={{
@@ -61,7 +61,7 @@ const IndustryProblem = () => {
                         borderRadius: '24px'
                     }}>
                         <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '1rem', fontStyle: 'italic', margin: 0 }}>
-                            "Organizations often possess the resources to grow but are constrained by inefficient execution pipelines. Time inefficiency is not an operational inconvenience — it is a structural business risk."
+                            "Our philosophy is simple: write fast code, document everything, and ship early. If it doesn't solve a real problem, we don't build it."
                         </p>
                     </div>
                 </motion.div>

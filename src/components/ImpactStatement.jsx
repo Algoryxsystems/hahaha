@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const BreakpointStats = [
-    "UNRESTRICTED", "VULNERABILITY", "DETECTION", "ENGINE", "ENGINEERED", "IDENTIFY", "ELIMINATE", "RISKS"
+const EcosystemDomains = [
+    "AI", "DEV TOOLS", "SAAS", "GRAPHICS", "CYBERSECURITY", "OPEN SOURCE", "EXPERIMENTS"
 ];
 
 const ImpactStatement = () => {
@@ -25,7 +25,7 @@ const ImpactStatement = () => {
                         marginBottom: '30px',
                         textTransform: 'uppercase'
                     }}>
-                        BREAKPOINT: NEW STANDARD IN SECURITY INTELLIGENCE
+                        WHAT WE BUILD
                     </p>
                     <div style={{
                         display: 'flex',
@@ -35,7 +35,7 @@ const ImpactStatement = () => {
                         opacity: 0.5,
                         filter: 'grayscale(100%) brightness(200%)'
                     }}>
-                        {BreakpointStats.map((stat, i) => (
+                        {EcosystemDomains.map((stat, i) => (
                             <motion.div
                                 key={i}
                                 whileHover={{ scale: 1.1, opacity: 1, filter: 'grayscale(0%) brightness(100%)' }}

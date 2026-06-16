@@ -2,10 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const statItems = [
-    { label: "Process Latency", value: "-85%", color: "#7000ff" },
-    { label: "Repetitive Tasks", value: "90%", color: "#0070ff" },
-    { label: "System Response", value: "3x Faster", color: "#ff00c8" },
-    { label: "Data Movement", value: "Streamlined", color: "#00d0ff" }
+    { label: "Core Latency", value: "< 5ms", color: "#7000ff" },
+    { label: "CPU Load", value: "Minimal", color: "#0070ff" },
+    { label: "Throughput Rate", value: "10 GB/s", color: "#ff00c8" },
+    { label: "Uptime", value: "99.99%", color: "#00d0ff" }
 ];
 
 const AnalyticsSection = () => {
@@ -19,11 +19,11 @@ const AnalyticsSection = () => {
                         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                     >
                         <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 800, marginBottom: '24px' }}>
-                            The Cost of <br />
-                            <span className="gradient-text">Inefficiency.</span>
+                            Specs & <br />
+                            <span className="gradient-text">Speed.</span>
                         </h2>
                         <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '40px' }}>
-                            Operational delays and manual dependencies lead to measurable time loss. Time inefficiency is not an operational inconvenience — it is a structural business risk.
+                            We care about frame rates and execution time. Our tools are optimized to run fast, use minimal memory, and scale cleanly.
                         </p>
 
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '20px' }}>
